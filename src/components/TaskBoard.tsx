@@ -31,6 +31,9 @@ export const TaskBoard: React.FC = () => {
     const handleAddTask = (task: Task) => {
         setTasks((prev) => [...prev, task]);
     };
+    const handleDeleteTask = (id: string) => {
+        setTasks((prev) => prev.filter((task) => task.id !== id));
+    };
 
     const columns: TaskStatus[] = ['backlog', 'in-progress', 'done']
 
@@ -44,7 +47,7 @@ export const TaskBoard: React.FC = () => {
                         {tasks
                             .filter((task) => task.status === col)
                             .map((task) => (
-                                <TaskCard key={task.id} task={task} />
+                                <TaskCard key={task.id} task={task} onDelete={handleDeleteTask} />
                             ))}
                     </div>
                 ))}
